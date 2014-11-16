@@ -1,0 +1,29 @@
+{
+  "name": "jam!",
+  "version": "0.0.0",
+  "homepage": "https://github.com/maniart/webapp-jam",
+  "authors": [
+    "maniart <mani.art@gmail.com>"
+  ],
+  "main": "main.js",
+  "keywords": [
+    "web",
+    "audio",
+    "api"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.1",
+    "underscore": "~1.7.0"
+  }
+}
