@@ -9,7 +9,8 @@ bodyParser,
 debug,
 server,
 port,
-io;
+io,
+routes;
 
 http = require('http');
 express = require('express');
@@ -17,19 +18,19 @@ path = require('path');
 socketio = require('socket.io');
 logger = require('morgan');
 bodyParser = require('body-parser');
-debug = require('debug')('jam!');
-
-
 app = express();
 server = http.createServer(app);
 io = socketio(server);
-port = process.env.PORT || 3030;
+routes = {};
+routes.index = require('./routes/index');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.use('/', routes.index);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -68,6 +69,7 @@ if(app.get('env') === 'production') {
 
 // development error handler
 // will print stacktrace
+
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -78,7 +80,9 @@ if (app.get('env') === 'development') {
     });
 }
 
+
 // socket.io setup
+/*
 io.on('connection', function(socket) {
 	console.log('new socket connection');
 	
@@ -92,4 +96,5 @@ io.on('connection', function(socket) {
   	});
 
 });
-
+*/
+module.exports = app;
