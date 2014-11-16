@@ -21,8 +21,11 @@ bodyParser = require('body-parser');
 app = express();
 server = http.createServer(app);
 io = socketio(server);
-routes = {};
-routes.index = require('./routes/index');
+controllers = {
+	index : require('./controllers/index'),
+	instruments : require('./controllers/instruments'),
+	synth : require('./controllers/synth')
+};
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,7 +34,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use('/', routes.index);
+app.use('/', controllers.index);
+app.use('/instruments', controllers.instruments);
+app.use('/instruments/synth', controllers.synth);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,16 +60,7 @@ app.use(function(req, res, next) {
 
 /// error handlers
 if(app.get('env') === 'production') {
-    /*TODO: fix this for launch */
-    /*
-    try {
-        var pid = npid.create('/var/run/pmfat.pid');
-        pid.removeOnExit();
-    } catch (err) {
-        console.log('>> app.js - npmid error : ',err);
-        process.exit(1);
-    }
-    */
+    
 }
 
 

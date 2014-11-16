@@ -11,13 +11,53 @@ app.routers = (function(w, d, Backbone) {
 		},
 
 		routes : {
-			'' : 'index'
+			'' : 'index',
+			'instruments/:instrument' : 'instrument',
+			'mixer' : 'mixer'
 		},
 
 		index : function() {
 			console.log('routers.js >> routes : index');
-		}
 
+		}, // index
+		instrument : function(name) {
+			
+			var name = name.
+						charAt(0).
+						toUpperCase() +
+						name.slice(1);
+
+			if(!(name in app.models)) {
+				debugger;
+				throw new Error('No such instrument.');
+			} else {
+				var instrument = new app.models[name]();
+				instrument.fetch({
+
+					success : function(model, response, options) {
+						console.log('routers.js >> Desktop instrument success - model - ', model, ' response - ', response, ' options: - ', options);
+					}, 
+					error : function(model, response, options) {
+						console.log('routers.js >> Desktop instrument error - model - ', model, ' response - ', response, ' options: - ', options);
+					
+					}
+				});
+			}
+		}, // instrument	
+		mixer : function() {
+			var mixer = new app.models.Mixer();
+			var onSuccess = function(model, response, options) {
+				console.log('routers.js >> Desktop mixer success - model - ', model, ' response - ', response, ' options: - ', options);	
+
+			};
+			var onError = function(model, response, options) {
+				console.log('routers.js >> Desktop mixer error - model - ', model, ' response - ', response, ' options: - ', options);	
+			};
+			mixer.fetch({
+				success : onSuccess,
+				error : onError
+			});
+		}
 	});
 
 	return {
