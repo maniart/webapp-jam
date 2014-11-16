@@ -3,7 +3,8 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
 	console.log('index.js >> routing.');
-	res.json('{}');
+	
+	res.sendFile('/public/index.html');
 });
 
 module.exports = router;
