@@ -22,17 +22,14 @@ app.routers = (function(w, d, Backbone) {
 		}, // index
 		instrument : function(name) {
 			
-			var name = name.
-						charAt(0).
-						toUpperCase() +
-						name.slice(1);
+			var name = name.charAt(0).toUpperCase() + name.slice(1);
 
-			if(!(name in app.models)) {
-				debugger;
+			if(!(name in app.models) || !(name in app.views)) {
 				throw new Error('No such instrument.');
 			} else {
-				var instrument = new app.models[name]();
-				instrument.fetch({
+				var instrumentModel = new app.models[name]();
+				var instrumentView = new app.views[name]({ model : instrumentModel });
+				instrumentModel.fetch({
 
 					success : function(model, response, options) {
 						console.log('routers.js >> Desktop instrument success - model - ', model, ' response - ', response, ' options: - ', options);

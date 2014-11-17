@@ -1,0 +1,24 @@
+html {
+	height: 100%;
+}
+body {
+	min-height: 100%;
+	background: #eee;
+}
+.instrument-container {
+	.instrument {
+		min-height: 100vh;
+		&.synth {
+			min-height: 100vh;
+			background-color: rgba(0, 200, 150, 1);
+			.key {
+				&.note {
+					height: 100vh;
+					float: left;			
+				}
+			}
+
+		}
+
+	}
+}

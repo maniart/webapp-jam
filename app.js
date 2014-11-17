@@ -1,16 +1,16 @@
 
 var http,
-express,
-path,
-socketio,
-app,
-logger,
-bodyParser,
-debug,
-server,
-port,
-io,
-routes;
+	express,
+	path,
+	socketio,
+	app,
+	logger,
+	bodyParser,
+	debug,
+	server,
+	port,
+	io,
+	routes;
 
 http = require('http');
 express = require('express');
