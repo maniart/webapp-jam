@@ -83,8 +83,13 @@ if (app.get('env') === 'development') {
 io.on('connection', function(socket) {
 	console.log('new socket connection');
 	
+    socket.on('note', function(freq) {
+        console.log('server.js >> note received: ', freq);
+        socket.broadcast.volatile.emit('note', freq); 
+    });
 
-	socket.on("disconnect", function(){
+
+	socket.on('disconnect', function(){
     	socket.broadcast.emit("leave", {
       		id: socket.id
     	});

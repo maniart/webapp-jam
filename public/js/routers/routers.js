@@ -13,13 +13,20 @@ app.routers = (function(w, d, Backbone) {
 		routes : {
 			'' : 'index',
 			'instruments/:instrument' : 'instrument',
-			'mixer' : 'mixer'
+			'mixer' : 'mixer',
+			'stage' : 'stage'
+		},
+
+		stage : function() {
+			console.log('routers.js >> routes : stage');
+			new app.views.Stage({ model : new app.models.Stage() });
 		},
 
 		index : function() {
 			console.log('routers.js >> routes : index');
 
 		}, // index
+		
 		instrument : function(name) {
 			
 			var name = name.charAt(0).toUpperCase() + name.slice(1);
@@ -41,6 +48,7 @@ app.routers = (function(w, d, Backbone) {
 				});
 			}
 		}, // instrument	
+		
 		mixer : function() {
 			var mixer = new app.models.Mixer();
 			var onSuccess = function(model, response, options) {

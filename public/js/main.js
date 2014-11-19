@@ -5,6 +5,9 @@ app.main = (function(w, d, Backbone, _, $) {
 
 	var routers = app.routers;
 
+	if(!(typeof io) === 'function') {
+		throw new Error('socket.io not found');
+	}
 	var socket = io();
 
 	var attachListeners = function() {
@@ -20,7 +23,8 @@ app.main = (function(w, d, Backbone, _, $) {
 	};
 
 	return {
-		init : init
+		init : init,
+		socket : socket
 	};
 
 }(window, document, Backbone, _, jQuery));

@@ -4,9 +4,16 @@ app.models = (function(w, d, Backbone, _, $) {
 
 	'use strict';
 
-	var Synth;
+	var Stage = Backbone.Model.extend({
 
-	Synth = Backbone.Model.extend({
+		initialize : function() {
+			console.log('models.js >> Stage : new instance');
+		},
+		urlRoot : '/stage'
+
+	});
+
+	var Synth = Backbone.Model.extend({
 
 		initialize : function() {
 			console.log('models.js >> Synth : new instance');
@@ -14,13 +21,14 @@ app.models = (function(w, d, Backbone, _, $) {
 		urlRoot : '/instruments/synth',
 
 		defualts : {
-			'comes from' : 'default'
+			
 		}
 
 
 	});
 
 	return {
+		Stage : Stage,
 		Synth : Synth
 	};
 
