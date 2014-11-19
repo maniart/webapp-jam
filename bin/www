@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 var debug = require('debug')('jam!');
-var app = require('../app');
+var server = require('../server');
+var port = process.env.PORT || 3030;
 
-app.set('port', process.env.PORT || 3000);
-
-var server = app.listen(app.get('port'), function() {
-  debug(' on port: ' + server.address().port);
+server.listen(port, function() {
+  debug(' on port: ' + port);
 });

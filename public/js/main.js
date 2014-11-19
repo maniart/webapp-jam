@@ -5,8 +5,17 @@ app.main = (function(w, d, Backbone, _, $) {
 
 	var routers = app.routers;
 
+	var socket = io();
+
+	var attachListeners = function() {
+		socket.on('connect', function() {
+			console.log('socket.io >> connected');
+			
+		});
+	};
 
 	var init = function() {
+		attachListeners();
 		new routers.Desktop();
 	};
 

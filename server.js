@@ -8,7 +8,6 @@ var http,
 	bodyParser,
 	debug,
 	server,
-	port,
 	io,
 	routes;
 
@@ -79,19 +78,17 @@ if (app.get('env') === 'development') {
 
 
 // socket.io setup
-/*
+
+// socket.io setup
 io.on('connection', function(socket) {
 	console.log('new socket connection');
 	
-		   
-	});
 
-	socket.on('disconnect', function(){
+	socket.on("disconnect", function(){
     	socket.broadcast.emit("leave", {
       		id: socket.id
     	});
   	});
-
 });
-*/
-module.exports = app;
+
+module.exports = server;
