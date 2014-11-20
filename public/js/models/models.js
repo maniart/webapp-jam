@@ -17,6 +17,7 @@ app.models = (function(w, d, Backbone, _, $) {
 
 		initialize : function() {
 			console.log('models.js >> Synth : new instance');
+			console.log('something');
 		},
 		urlRoot : '/instruments/synth',
 
@@ -29,6 +30,9 @@ app.models = (function(w, d, Backbone, _, $) {
 
 	return {
 		Stage : Stage,
+
+
+
 		Synth : Synth
 	};
 
