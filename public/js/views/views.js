@@ -25,6 +25,9 @@ app.views = (function(w, d, Backbone, _, $) {
 			this.socket.on('note', function(freq) {
 				console.log('socket.io >> note : ', freq);
 			});
+			this.socket.on('orientation', function(data) {
+				console.log('socket.io >> orienation : ', data);
+			});
 		},
 
 		initialize : function() {
@@ -60,7 +63,17 @@ app.views = (function(w, d, Backbone, _, $) {
 		},
 
 		attachListeners : function() {
+			var _this = this,
+				orientationArray = [];
 			this.listenTo(this.model, 'change', this.render);
+			/*
+			w.addEventListener('deviceorientation', function(event) {
+				
+				orientationArray.push(event.alpha, event.beta, event.gamma);
+				console.log(orientationArray);
+				_this.socket.emit('orienation', orientationArray);
+			});
+			*/		
 		},
 
 		initialize : function() {
@@ -74,8 +87,11 @@ app.views = (function(w, d, Backbone, _, $) {
 				this.socket.emit('note', $(ev.gesture.target).data('frequency'));
 			},
 			'pan' : function(ev) {
-				console.log('*pan ', $(ev.gesture.target).data('frequency'));
-				this.socket.emit('note', $(ev.gesture.target).data('frequency'));
+				var freq = $(d.elementFromPoint(ev.gesture.pointers[0].clientX, ev.gesture.pointers[0].clientY)).data('frequency');
+				if(!(undefined === freq)) {
+					console.log('*pan emit: ', freq);
+					this.socket.emit('note', freq);
+				}
 			}
 		}
 

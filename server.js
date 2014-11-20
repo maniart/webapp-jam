@@ -88,6 +88,11 @@ io.on('connection', function(socket) {
         socket.broadcast.volatile.emit('note', freq); 
     });
 
+    socket.on('orientation', function(data) {
+        console.log('server.js >> orientation received: ', ' data: ', data);
+        socket.broadcast.volatile.emit('orientation', data); 
+    });
+
 
 	socket.on('disconnect', function(){
     	socket.broadcast.emit("leave", {
